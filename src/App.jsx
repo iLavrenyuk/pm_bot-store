@@ -20,14 +20,14 @@ export const App = () => {
   console.log('window.Telegram =>>>> ', window.Telegram);
 
   return (
-    <div className="grid grid-cols-3 sm:grid-cols-4 gap-5">
+    <div className="grid grid-cols-3 sm:grid-cols-4 gap-5 text-white">
       {data?.map((product) => (
-        <div className="flex flex-col justify-center items-center text-sm" key={product.id}>
-          <img className="max-h-20" src={product.image} alt="" />
-          <span className="text-xs">
+        <div className="flex flex-col justify-center items-center" key={product.id}>
+          <img className="max-h-28" src={product.image} alt="" />
+          <span className="text-sm">
             {product.name} · ${product.price}
           </span>
-          <button className="mt-1 px-4 py-0.5 bg-amber-400 text-white font-bold rounded-md">ADD</button>
+          <button className="mt-1 px-6 py-1 bg-amber-400 font-bold rounded-md">ADD</button>
         </div>
       ))}
     </div>
