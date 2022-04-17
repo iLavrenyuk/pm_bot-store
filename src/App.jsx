@@ -23,7 +23,7 @@ export const App = () => {
   console.log('window.Telegram =>>>> ', window.Telegram);
 
   return isLoading ? (
-    <div className="flex justify-center items-center bg-black h-screen">
+    <div className="flex justify-center h-screen pt-20">
       <svg className="animate-spin h-1/3 w-1/3 text-white" fill="none" viewBox="0 0 24 24">
         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
         <path
@@ -34,7 +34,7 @@ export const App = () => {
       </svg>
     </div>
   ) : (
-    <div className="grid grid-cols-3 sm:grid-cols-4 gap-5 text-white bg-black h-screen">
+    <div className="grid grid-cols-3 sm:grid-cols-4 gap-5 text-white h-screen">
       {data?.map((product) => (
         <div className="flex flex-col justify-center items-center" key={product.id}>
           <img className="max-h-28" src={product.image} alt="" />
