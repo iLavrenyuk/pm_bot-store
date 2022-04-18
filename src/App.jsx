@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import defaultProducts from './data/defaultProducts';
 import { CatalogItem } from './components/CatalogItem';
 
 export const App = () => {
@@ -10,7 +11,7 @@ export const App = () => {
 
   const getData = async () => {
     try {
-      const res = await axios.get('https://sheet.best/api/sheets/e1cd0f2b-00db-46f4-89d9-888da2c874a9');
+      const res = await axios.get('https://sheet.best/api/sheets/1d7992df-3040-4d5f-9704-73ea7e482e5sd5');
       setData(res.data);
       setApiError(null);
     } catch (error) {
@@ -29,6 +30,12 @@ export const App = () => {
   return (
     <div className={`${isLightTheme ? 'light' : 'dark'} text-slate-800 dark:text-white min-h-2/3`}>
       <p className="">{JSON.stringify(window.Telegram)}</p>
+      <button
+        className="mt-1 px-6 py-1 bg-amber-400 font-bold rounded-md"
+        onClick={() => navigator.clipboard.writeText(JSON.stringify(window.Telegram))}
+      >
+        COPY
+      </button>
       {isLoading ? (
         <div className="flex justify-center pt-20">
           <svg className="animate-spin h-1/3 w-1/3" fill="none" viewBox="0 0 24 24">
@@ -44,6 +51,15 @@ export const App = () => {
         <div className="flex flex-col item-center text-center pt-20">
           <span className="font-bold text-3xl">Error 404</span>
           <span className="font-bold text-xl">Something went wrong</span>
+          <button
+            className="mt-1 px-6 py-1 bg-amber-400 font-bold rounded-md"
+            onClick={() => {
+              setData(defaultProducts);
+              setApiError(null);
+            }}
+          >
+            Display mock data
+          </button>
         </div>
       ) : (
         <div className="grid grid-cols-3 sm:grid-cols-4 gap-5">
