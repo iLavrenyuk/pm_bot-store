@@ -11,7 +11,7 @@ export const App = () => {
 
   const getData = async () => {
     try {
-      const res = await axios.get('https://sheet.best/api/sheets/1d7992df-3040-4d5f-9704-73ea7e482e55');
+      const res = await axios.get('https://sheet.best/api/sheets/1d7992df-3040-4d5f-9704-73ea7e482e55!');
       setData(res.data);
       setApiError(null);
     } catch (error) {
@@ -23,7 +23,9 @@ export const App = () => {
   useEffect(() => {
     setIsLightTheme(window.Telegram.WebApp.colorScheme === 'light');
     getData();
+    window.Telegram.WebApp.MainButton.enable();
   }, []);
+  console.log('window.Telegram =>>>> ', window.Telegram);
 
   return (
     <div className={`${isLightTheme ? 'light' : 'dark'}`}>
