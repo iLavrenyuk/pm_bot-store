@@ -11,7 +11,7 @@ export const App = () => {
 
   const getData = async () => {
     try {
-      const res = await axios.get('https://sheet.best/api/sheets/1d7992df-3040-4d5f-9704-73ea7e482e55!');
+      const res = await axios.get('https://sheet.best/api/sheets/1d7992df-3040-4d5f-9704-73ea7e482e55');
       setData(res.data);
       setApiError(null);
     } catch (error) {
@@ -23,19 +23,18 @@ export const App = () => {
   useEffect(() => {
     setIsLightTheme(window.Telegram.WebApp.colorScheme === 'light');
     getData();
-    window.Telegram.WebApp.MainButton.enable();
+    window.Telegram.WebApp.MainButton.show();
   }, []);
   console.log('window.Telegram =>>>> ', window.Telegram);
 
   return (
     <div className={`${isLightTheme ? 'light' : 'dark'}`}>
       <div className="text-slate-800 dark:text-white min-h-2/3">
-        <p className="">{JSON.stringify(window.Telegram)}</p>
         <button
           className="mt-1 px-6 py-1 bg-amber-400 font-bold rounded-md"
           onClick={() => navigator.clipboard.writeText(JSON.stringify(window.Telegram))}
         >
-          COPY
+          COPY tg data
         </button>
         {isLoading ? (
           <div className="flex justify-center pt-20">
