@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import defaultProducts from './data/defaultProducts';
+import { Button } from './components/Button';
 import { CatalogItem } from './components/CatalogItem';
 
 export const App = () => {
@@ -11,7 +12,7 @@ export const App = () => {
 
   const getData = async () => {
     try {
-      const res = await axios.get('https://sheet.best/api/sheets/1d7992df-3040-4d5f-9704-73ea7e482e55');
+      const res = await axios.get('https://sheet.best/api/sheets/1d7992df-3040-4d5f-9704-73ea7e482e55!');
       setData(res.data);
       setApiError(null);
     } catch (error) {
@@ -23,19 +24,19 @@ export const App = () => {
   useEffect(() => {
     setIsLightTheme(window.Telegram.WebApp.colorScheme === 'light');
     getData();
-    window.Telegram.WebApp.MainButton.show();
   }, []);
   console.log('window.Telegram =>>>> ', window.Telegram);
 
   return (
     <div className={`${isLightTheme ? 'light' : 'dark'}`}>
       <div className="text-slate-800 dark:text-white min-h-2/3">
-        <button
-          className="mt-1 px-6 py-1 bg-amber-400 font-bold rounded-md"
-          onClick={() => navigator.clipboard.writeText(JSON.stringify(window.Telegram))}
-        >
-          COPY tg data
-        </button>
+        <div className="flex flex-col items-center">
+          <Button onClick={() => navigator.clipboard.writeText(JSON.stringify(window.Telegram))}>COPY tg data</Button>
+          <Button onClick={() => window.Telegram.WebApp.MainButton.show()}>show()</Button>
+          <Button onClick={() => window.Telegram.WebApp.MainButton.hide()}>hide()</Button>
+          <Button onClick={() => window.Telegram.WebApp.MainButton.enable()}>enable()</Button>
+          <Button onClick={() => window.Telegram.WebApp.MainButton.disable()}>disable()</Button>
+        </div>
         {isLoading ? (
           <div className="flex justify-center pt-20">
             <svg className="animate-spin h-1/3 w-1/3" fill="none" viewBox="0 0 24 24">
@@ -48,18 +49,17 @@ export const App = () => {
             </svg>
           </div>
         ) : apiError ? (
-          <div className="flex flex-col item-center text-center pt-20">
+          <div className="flex flex-col items-center text-center pt-20">
             <span className="font-bold text-3xl">Error 404</span>
             <span className="font-bold text-xl">Something went wrong</span>
-            <button
-              className="mt-1 px-6 py-1 bg-amber-400 font-bold rounded-md"
-              onClick={() => {
+            <Button
+              nClick={() => {
                 setData(defaultProducts);
                 setApiError(null);
               }}
             >
               Display mock data
-            </button>
+            </Button>
           </div>
         ) : (
           <div className="grid grid-cols-3 sm:grid-cols-4 gap-5">
