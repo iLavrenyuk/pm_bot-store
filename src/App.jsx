@@ -10,6 +10,8 @@ export const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLightTheme, setIsLightTheme] = useState(true);
 
+  const [counterClicks, setCounterClicks] = useState(0);
+
   const getData = async () => {
     try {
       const res = await axios.get('https://sheet.best/api/sheets/1d7992df-3040-4d5f-9704-73ea7e482e55!');
@@ -27,15 +29,18 @@ export const App = () => {
   }, []);
   console.log('window.Telegram =>>>> ', window.Telegram);
 
+  window.Telegram.WebApp.MainButton.onClick(setCounterClicks(counterClicks + 1));
+
   return (
     <div className={`${isLightTheme ? 'light' : 'dark'}`}>
       <div className="text-slate-800 dark:text-white min-h-2/3">
         <div className="flex flex-col items-center">
           <Button onClick={() => navigator.clipboard.writeText(JSON.stringify(window.Telegram))}>COPY tg data</Button>
-          <Button onClick={() => window.Telegram.WebApp.MainButton.show()}>show()</Button>
-          <Button onClick={() => window.Telegram.WebApp.MainButton.hide()}>hide()</Button>
-          <Button onClick={() => window.Telegram.WebApp.MainButton.enable()}>enable()</Button>
-          <Button onClick={() => window.Telegram.WebApp.MainButton.disable()}>disable()</Button>
+          <Button onClick={window.Telegram.WebApp.MainButton.show}>show()</Button>
+          <Button onClick={window.Telegram.WebApp.MainButton.hide}>hide()</Button>
+          <Button onClick={window.Telegram.WebApp.MainButton.enable}>enable()</Button>
+          <Button onClick={window.Telegram.WebApp.MainButton.disable}>disable()</Button>
+          {counterClicks ? <span className="font-bold text-3xl">{counterClicks}</span> : null}
         </div>
         {isLoading ? (
           <div className="flex justify-center pt-20">
@@ -53,7 +58,7 @@ export const App = () => {
             <span className="font-bold text-3xl">Error 404</span>
             <span className="font-bold text-xl">Something went wrong</span>
             <Button
-              nClick={() => {
+              onClick={() => {
                 setData(defaultProducts);
                 setApiError(null);
               }}
