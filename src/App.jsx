@@ -29,7 +29,7 @@ export const App = () => {
   }, []);
   console.log('window.Telegram =>>>> ', window.Telegram);
 
-  window.Telegram.WebApp.MainButton.onClick(setCounterClicks(counterClicks + 1));
+  window.Telegram.WebApp.MainButton.onClick(() => setCounterClicks(counterClicks + 1));
 
   return (
     <div className={`${isLightTheme ? 'light' : 'dark'}`}>
