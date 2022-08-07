@@ -40,6 +40,7 @@ export const App = () => {
           <Button onClick={window.Telegram.WebApp.MainButton.hide}>hide()</Button>
           <Button onClick={window.Telegram.WebApp.MainButton.enable}>enable()</Button>
           <Button onClick={window.Telegram.WebApp.MainButton.disable}>disable()</Button>
+          <a href="https://telegra.ph/Organy-dyhaniya-04-25">telegraph</a>
           {counterClicks ? <span className="font-bold text-3xl">{counterClicks}</span> : null}
         </div>
         {isLoading ? (
